@@ -1,3 +1,4 @@
+import 'package:fasn/pages/app_page/main_page.dart';
 import 'package:fasn/pages/aunth_page/reg_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fasn/pages/aunth_page/start_screen.dart';
@@ -22,11 +23,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+      })),
       title: 'Fasn',
       initialRoute: "/",
       routes: {
         '/': (context) => StartScreen(),
         '/registration': (context) => LoginScreen(),
+        '/account': (context) => MainAppScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
