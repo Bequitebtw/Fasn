@@ -1,3 +1,3 @@
 import 'package:flutter_svg/flutter_svg.dart';
 
-SvgPicture success = SvgPicture.asset('/assets/images/Vector.svg');
+final SvgPicture googleIcon = SvgPicture.asset('/images/googleIcon.svg');

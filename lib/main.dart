@@ -1,7 +1,8 @@
 import 'package:fasn/pages/app_page/main_page.dart';
-import 'package:fasn/pages/aunth_page/reg_page.dart';
+import 'package:fasn/pages/aunth_page/mainWidgets/login_page.dart';
+import 'package:fasn/pages/aunth_page/mainWidgets/reg_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fasn/pages/aunth_page/start_screen.dart';
+import 'package:fasn/pages/aunth_page/mainWidgets/start_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -33,8 +34,9 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/': (context) => StartScreen(),
-        '/registration': (context) => LoginScreen(),
-        '/account': (context) => MainAppScreen(),
+        '/registrationRoute': (context) => RegScreen(),
+        '/accountRoute': (context) => MainAppScreen(),
+        '/loginRoute': (context) => LoginScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

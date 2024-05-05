@@ -1,3 +1,4 @@
+import 'package:fasn/design/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class MainAppScreen extends StatelessWidget {
@@ -5,6 +6,13 @@ class MainAppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(
+        child: Text(
+          "ACCOUNT",
+          style: TextStyle(fontSize: fontSize64),
+        ),
+      ),
+    );
   }
 }

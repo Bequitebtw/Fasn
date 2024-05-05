@@ -58,7 +58,7 @@ class StartScreen extends StatelessWidget {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
                   onPressed: () =>
-                      {Navigator.pushNamed(context, "/registration")},
+                      {Navigator.pushNamed(context, "/registrationRoute")},
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,9 +70,6 @@ class StartScreen extends StatelessWidget {
                             fontSize: fontSize16,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
-                      ),
-                      SizedBox(
-                        width: 10,
                       ),
                       Icon(
                         Icons.arrow_forward,
