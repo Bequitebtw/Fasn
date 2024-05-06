@@ -1,6 +1,8 @@
 import 'package:fasn/main.dart';
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
+import 'package:fasn/pages/app/main.app.screen.dart';
+import 'package:fasn/pages/app/test.scree.dart';
 import 'package:fasn/pages/auth/widgets/signIn/sign.in.link.dart';
 import 'package:fasn/pages/auth/widgets/signUp/sign.up.header.dart';
 import 'package:fasn/pages/auth/widgets/signUp/sign.up.link.dart';
@@ -10,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -39,11 +43,25 @@ class _RegScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
+    _setupAuthListener();
     bool _isDisabled = true;
     super.initState();
     _emailController.addListener(updateFieldButton);
     _nameController.addListener(updateFieldButton);
     _passwordController.addListener(updateFieldButton);
+  }
+
+  void _setupAuthListener() {
+    supabase.auth.onAuthStateChange.listen((data) {
+      final event = data.event;
+      if (event == AuthChangeEvent.signedIn) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ProfileScreen(),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -148,6 +166,35 @@ class _RegScreenState extends State<SignUpScreen> {
     return Icon(Icons.abc, color: Colors.green);
   }
 
+  Future<AuthResponse> _googleSignIn() async {
+    const webClientId =
+        '766474982180-u7jr8c78u2j5qqeat3roh76dtid9l5r6.apps.googleusercontent.com';
+    // const iosClientId = 'my-ios.apps.googleusercontent.com';
+
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      // clientId: iosClientId,
+      serverClientId: webClientId,
+    );
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    final accessToken = googleAuth.accessToken;
+    final idToken = googleAuth.idToken;
+
+    if (accessToken == null) {
+      throw 'No Access Token found.';
+    }
+    if (idToken == null) {
+      throw 'No ID Token found.';
+    }
+
+    return supabase.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: accessToken,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -513,7 +560,7 @@ class _RegScreenState extends State<SignUpScreen> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
-                      onPressed: null,
+                      onPressed: _googleSignIn,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

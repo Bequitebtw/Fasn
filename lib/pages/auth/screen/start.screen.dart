@@ -56,8 +56,10 @@ class StartScreen extends StatelessWidget {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
-                  onPressed: () =>
-                      {Navigator.pushNamed(context, "/SignUpRoute")},
+                  onPressed: () => {
+                        Navigator.pop(context),
+                        Navigator.pushNamed(context, "/SignUpRoute")
+                      },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

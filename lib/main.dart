@@ -1,4 +1,5 @@
 import 'package:fasn/pages/app/main.app.screen.dart';
+import 'package:fasn/pages/app/test.scree.dart';
 import 'package:fasn/pages/auth/screen/sign.in.screen.dart';
 import 'package:fasn/pages/auth/screen/sign.up.screen.dart';
 import 'package:fasn/pages/auth/screen/reset.screen.dart';
@@ -32,12 +33,14 @@ class MyApp extends StatelessWidget {
         TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
       })),
       title: 'Fasn',
-      initialRoute: supabase.auth.currentSession != null ? '/AppRoute' : '/',
+      initialRoute:
+          supabase.auth.currentSession != null ? '/TestProfileRoute' : '/',
       routes: {
         '/': (context) => StartScreen(),
         '/SignUpRoute': (context) => SignUpScreen(),
-        '/AppRoute': (context) => MainAppScreen(),
+        '/AppRoute': (context) => ProfileScreen(),
         '/SignInRoute': (context) => SignInScreen(),
+        '/TestProfileRoute': (context) => ProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
