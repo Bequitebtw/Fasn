@@ -1,6 +1,9 @@
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
+import 'package:fasn/pages/aunth_page/mainWidgets/reset_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LogReset extends StatelessWidget {
   const LogReset({super.key});
@@ -22,7 +25,12 @@ class LogReset extends StatelessWidget {
             ),
             TextButton(
                 style: ButtonStyle(splashFactory: NoSplash.splashFactory),
-                onPressed: () => {},
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => const ResetPassword()))
+                    },
                 child: Text(
                   "Reset your password",
                   style: TextStyle(

@@ -32,6 +32,14 @@ class _RegScreenState extends State<RegScreen> {
   TextEditingController _passwordController = TextEditingController();
   bool _passwordVisible = true;
 
+  Future<void> createUser({
+    required final String email,
+    required final String password,
+  }) async {
+    final responce =
+        await supabase.auth.signUp(email: email, password: password);
+  }
+
   @override
   void initState() {
     bool _isDisabled = true;
@@ -62,8 +70,6 @@ class _RegScreenState extends State<RegScreen> {
   void _validateForm() {
     setState(() {
       _isDisabled = _formKey.currentState?.validate() ?? false;
-      print(_isDisabled);
-      print("1");
     });
   }
 
@@ -465,23 +471,12 @@ class _RegScreenState extends State<RegScreen> {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
-                  onPressed: _isAgree()
-                      ? () async {
-                          try {
-                            final email = _emailController.text.trim();
-                            final password = _passwordController.text.trim();
-                            await supabase.auth
-                                .signUp(password: password, email: email);
-                            Navigator.of(context)
-                                .pushReplacementNamed('/accountRoute');
-                          } catch (e) {
-                            print(e);
-                          }
-                        }
-                      : null,
-                  // _emailController.clear(),
-                  // _passwordController.clear(),
-                  // _nameController.clear(),
+                  onPressed: () async {
+                    createUser(
+                        email: _emailController.text,
+                        password: _passwordController.text);
+                    Navigator.pushReplacementNamed(context, '/loginRoute');
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

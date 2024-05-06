@@ -5,6 +5,7 @@ import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_reset.dart
 import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_cookie.dart';
 import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_header.dart';
 import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_login_link.dart';
+import 'package:fasn/pages/aunth_page/secondryWidgets/resetPage/reset_header.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fasn/design/colors.dart';
@@ -17,28 +18,18 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ResetScreen extends StatefulWidget {
+  const ResetScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _RegScreenState();
+  State<ResetScreen> createState() => _RegScreenState();
 }
 
-class _RegScreenState extends State<LoginScreen> {
+class _RegScreenState extends State<ResetScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isDisabled = false;
   String? _emailError;
   TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  bool _passwordVisible = true;
-
-  Future<void> userLogin({
-    required final String email,
-    required final String password,
-  }) async {
-    final responce = await supabase.auth
-        .signInWithPassword(email: email, password: password);
-  }
 
   @override
   void initState() {
@@ -50,14 +41,11 @@ class _RegScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
   bool _isAgree() {
-    if (_isDisabled &&
-        _emailController.text != "" &&
-        _passwordController.text != "") {
+    if (_isDisabled && _emailController.text != "") {
       return true;
     }
     return false;
@@ -107,11 +95,11 @@ class _RegScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(left: 25, top: 40, right: 25, bottom: 10),
+        padding: EdgeInsets.only(left: 25, right: 25, bottom: 10),
         color: Colors.white,
         child: Column(
           children: [
-            const LogHeader(),
+            const ResetHeader(),
             Form(
                 key: _formKey,
                 child: Column(
@@ -209,113 +197,8 @@ class _RegScreenState extends State<LoginScreen> {
                             ),
                           ],
                         )),
-                    Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 20),
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 7,
-                                bottom: 4,
-                              ),
-                              child: Text("Password",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0,
-                                      fontSize: fontSize16,
-                                      fontFamily: "Poppins",
-                                      color: (primary900))),
-                            ),
-                            TextFormField(
-                              onChanged: (_) {
-                                _validateForm();
-                              },
-                              controller: _passwordController,
-                              cursorColor: Colors.black,
-                              cursorHeight: 25,
-                              cursorWidth: 0.8,
-                              obscureText: _passwordVisible,
-                              decoration: InputDecoration(
-                                  suffixIconColor: _passwordVisible
-                                      ? primary400
-                                      : primary900,
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          if (_passwordVisible == false) {
-                                            _passwordVisible = true;
-                                          } else {
-                                            _passwordVisible = false;
-                                          }
-                                        });
-                                      },
-                                      icon: Icon(_passwordVisible
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility_outlined)),
-                                  errorStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red),
-                                  contentPadding: EdgeInsets.only(
-                                      top: 18, bottom: 18, left: 10, right: 20),
-                                  labelText: "Сreate a new password",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  labelStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize16,
-                                      fontWeight: FontWeight.w400,
-                                      color: primary400),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: primary900, width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: _ChangeColor(
-                                            _passwordController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: _ChangeColor(
-                                            _passwordController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: _ChangeColor(
-                                            _passwordController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10))),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0,
-                                  fontSize: fontSize16,
-                                  fontFamily: "Poppins",
-                                  color: (primary900)),
-                            ),
-                          ],
-                        )),
                   ],
                 )),
-            LogReset(),
             SizedBox(
               height: 24,
             ),
@@ -328,15 +211,7 @@ class _RegScreenState extends State<LoginScreen> {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
-                  onPressed: _isAgree()
-                      ? () async {
-                          await userLogin(
-                              email: _emailController.text,
-                              password: _passwordController.text);
-                          Navigator.pushReplacementNamed(
-                              context, '/accountRoute');
-                        }
-                      : null,
+                  onPressed: _isAgree() ? () async {} : null,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -351,50 +226,6 @@ class _RegScreenState extends State<LoginScreen> {
                       ),
                     ],
                   )),
-            ),
-            Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 20, bottom: 20),
-                child: Text("Or",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w400,
-                        fontSize: fontSize14,
-                        color: primary500))),
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        side: BorderSide(width: 1, color: primary200),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      onPressed: null,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 54,
-                            padding: EdgeInsets.only(right: 10),
-                          ),
-                          Text(
-                            "Sign Up With Google",
-                            style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: fontSize16,
-                                fontWeight: FontWeight.w500,
-                                color: primary900),
-                          ),
-                        ],
-                      )),
-                  RegLink(),
-                ],
-              ),
             ),
           ],
         ),

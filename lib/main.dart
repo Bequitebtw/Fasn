@@ -1,6 +1,7 @@
 import 'package:fasn/pages/app_page/main_page.dart';
 import 'package:fasn/pages/aunth_page/mainWidgets/login_page.dart';
 import 'package:fasn/pages/aunth_page/mainWidgets/reg_page.dart';
+import 'package:fasn/pages/aunth_page/mainWidgets/reset_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fasn/pages/aunth_page/mainWidgets/start_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
         TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
       })),
       title: 'Fasn',
-      initialRoute: "/",
+      initialRoute:
+          supabase.auth.currentSession != null ? '/accountRoute' : '/',
       routes: {
         '/': (context) => StartScreen(),
         '/registrationRoute': (context) => RegScreen(),
