@@ -1,9 +1,9 @@
-import 'package:fasn/pages/app_page/main_page.dart';
-import 'package:fasn/pages/aunth_page/mainWidgets/login_page.dart';
-import 'package:fasn/pages/aunth_page/mainWidgets/reg_page.dart';
-import 'package:fasn/pages/aunth_page/mainWidgets/reset_page.dart';
+import 'package:fasn/pages/app/main.app.screen.dart';
+import 'package:fasn/pages/auth/screen/sign.in.screen.dart';
+import 'package:fasn/pages/auth/screen/sign.up.screen.dart';
+import 'package:fasn/pages/auth/screen/reset.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fasn/pages/aunth_page/mainWidgets/start_screen.dart';
+import 'package:fasn/pages/auth/screen/start.screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -32,13 +32,12 @@ class MyApp extends StatelessWidget {
         TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
       })),
       title: 'Fasn',
-      initialRoute:
-          supabase.auth.currentSession != null ? '/accountRoute' : '/',
+      initialRoute: supabase.auth.currentSession != null ? '/AppRoute' : '/',
       routes: {
         '/': (context) => StartScreen(),
-        '/registrationRoute': (context) => RegScreen(),
-        '/accountRoute': (context) => MainAppScreen(),
-        '/loginRoute': (context) => LoginScreen(),
+        '/SignUpRoute': (context) => SignUpScreen(),
+        '/AppRoute': (context) => MainAppScreen(),
+        '/SignInRoute': (context) => SignInScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

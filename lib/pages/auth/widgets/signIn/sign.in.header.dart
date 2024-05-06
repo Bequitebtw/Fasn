@@ -2,8 +2,8 @@ import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
 import 'package:flutter/material.dart';
 
-class LogHeader extends StatelessWidget {
-  const LogHeader({super.key});
+class SignInHeader extends StatelessWidget {
+  const SignInHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

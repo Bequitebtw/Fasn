@@ -1,6 +1,5 @@
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
-import 'package:fasn/design/images.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
@@ -58,7 +57,7 @@ class StartScreen extends StatelessWidget {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
                   onPressed: () =>
-                      {Navigator.pushNamed(context, "/registrationRoute")},
+                      {Navigator.pushNamed(context, "/SignUpRoute")},
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

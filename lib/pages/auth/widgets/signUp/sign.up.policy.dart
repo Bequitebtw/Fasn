@@ -2,8 +2,8 @@ import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
 import 'package:flutter/material.dart';
 
-class RegCookie extends StatelessWidget {
-  const RegCookie({super.key});
+class SignUpPolicy extends StatelessWidget {
+  const SignUpPolicy({super.key});
 
   @override
   Widget build(BuildContext context) {

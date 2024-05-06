@@ -1,30 +1,24 @@
 import 'package:fasn/main.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_header.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_reg_link.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_reset.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_cookie.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_header.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_login_link.dart';
-import 'package:flutter/gestures.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
-import 'package:fasn/design/images.dart';
+import 'package:fasn/pages/auth/widgets/signIn/sign.in.header.dart';
+import 'package:fasn/pages/auth/widgets/signIn/sign.in.link.dart';
+import 'package:fasn/pages/auth/widgets/signIn/sign.in.reset.dart';
+import 'package:fasn/pages/auth/widgets/signUp/sign.up.link.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _RegScreenState();
+  State<SignInScreen> createState() => _RegScreenState();
 }
 
-class _RegScreenState extends State<LoginScreen> {
+class _RegScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isDisabled = false;
   String? _emailError;
@@ -111,7 +105,7 @@ class _RegScreenState extends State<LoginScreen> {
         color: Colors.white,
         child: Column(
           children: [
-            const LogHeader(),
+            const SignInHeader(),
             Form(
                 key: _formKey,
                 child: Column(
@@ -315,7 +309,7 @@ class _RegScreenState extends State<LoginScreen> {
                         )),
                   ],
                 )),
-            LogReset(),
+            SignInReset(),
             SizedBox(
               height: 24,
             ),
@@ -333,8 +327,7 @@ class _RegScreenState extends State<LoginScreen> {
                           await userLogin(
                               email: _emailController.text,
                               password: _passwordController.text);
-                          Navigator.pushReplacementNamed(
-                              context, '/accountRoute');
+                          Navigator.pushReplacementNamed(context, '/AppRoute');
                         }
                       : null,
                   child: Row(
@@ -392,7 +385,7 @@ class _RegScreenState extends State<LoginScreen> {
                           ),
                         ],
                       )),
-                  RegLink(),
+                  SignInLink(),
                 ],
               ),
             ),

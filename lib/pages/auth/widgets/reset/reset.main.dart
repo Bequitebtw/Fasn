@@ -1,31 +1,20 @@
-import 'package:fasn/main.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_header.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_reg_link.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/loginPage/login_reset.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_cookie.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_header.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_login_link.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/resetPage/reset_header.dart';
-import 'package:flutter/gestures.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
-import 'package:fasn/design/images.dart';
+import 'package:fasn/pages/auth/widgets/reset/reset.header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class ResetScreen extends StatefulWidget {
-  const ResetScreen({super.key});
+class ResetMainScreen extends StatefulWidget {
+  const ResetMainScreen({super.key});
 
   @override
-  State<ResetScreen> createState() => _RegScreenState();
+  State<ResetMainScreen> createState() => _RegScreenState();
 }
 
-class _RegScreenState extends State<ResetScreen> {
+class _RegScreenState extends State<ResetMainScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isDisabled = false;
   String? _emailError;

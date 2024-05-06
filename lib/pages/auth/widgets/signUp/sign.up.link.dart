@@ -2,8 +2,8 @@ import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
 import 'package:flutter/material.dart';
 
-class RegLink extends StatelessWidget {
-  const RegLink({super.key});
+class SignUpLink extends StatelessWidget {
+  const SignUpLink({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class RegLink extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Don`t have an account?",
+              "Already hane an account?",
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: fontSize16,
@@ -23,12 +23,10 @@ class RegLink extends StatelessWidget {
             ),
             TextButton(
                 style: ButtonStyle(splashFactory: NoSplash.splashFactory),
-                onPressed: () => {
-                      Navigator.pushReplacementNamed(
-                          context, "/registrationRoute")
-                    },
+                onPressed: () =>
+                    {Navigator.pushReplacementNamed(context, "/SignInRoute")},
                 child: Text(
-                  "Join",
+                  "Log In",
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: fontSize16,

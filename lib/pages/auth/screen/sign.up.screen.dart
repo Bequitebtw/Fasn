@@ -1,27 +1,24 @@
 import 'package:fasn/main.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_cookie.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_header.dart';
-import 'package:fasn/pages/aunth_page/secondryWidgets/regPage/reg_login_link.dart';
-import 'package:flutter/gestures.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
-import 'package:fasn/design/images.dart';
+import 'package:fasn/pages/auth/widgets/signIn/sign.in.link.dart';
+import 'package:fasn/pages/auth/widgets/signUp/sign.up.header.dart';
+import 'package:fasn/pages/auth/widgets/signUp/sign.up.link.dart';
+import 'package:fasn/pages/auth/widgets/signUp/sign.up.policy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class RegScreen extends StatefulWidget {
-  const RegScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<RegScreen> createState() => _RegScreenState();
+  State<SignUpScreen> createState() => _RegScreenState();
 }
 
-class _RegScreenState extends State<RegScreen> {
+class _RegScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isDisabled = false;
   String? _nameError;
@@ -61,7 +58,7 @@ class _RegScreenState extends State<RegScreen> {
     if (_isDisabled &&
         _emailController.text != "" &&
         _nameController.text != "" &&
-        _passwordController.text != 0) {
+        _passwordController.text != "") {
       return true;
     }
     return false;
@@ -158,7 +155,7 @@ class _RegScreenState extends State<RegScreen> {
         color: Colors.white,
         child: Column(
           children: [
-            const RegHeader(),
+            const SignUpHeader(),
             Form(
                 key: _formKey,
                 child: Column(
@@ -458,7 +455,7 @@ class _RegScreenState extends State<RegScreen> {
                         )),
                   ],
                 )),
-            RegCookie(),
+            SignUpPolicy(),
             SizedBox(
               height: 24,
             ),
@@ -471,12 +468,15 @@ class _RegScreenState extends State<RegScreen> {
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)))),
-                  onPressed: () async {
-                    createUser(
-                        email: _emailController.text,
-                        password: _passwordController.text);
-                    Navigator.pushReplacementNamed(context, '/loginRoute');
-                  },
+                  onPressed: _isAgree()
+                      ? () async {
+                          createUser(
+                              email: _emailController.text,
+                              password: _passwordController.text);
+                          Navigator.pushReplacementNamed(
+                              context, '/SignInRoute');
+                        }
+                      : null,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -532,7 +532,7 @@ class _RegScreenState extends State<RegScreen> {
                           ),
                         ],
                       )),
-                  LoginLink(),
+                  SignUpLink(),
                 ],
               ),
             ),

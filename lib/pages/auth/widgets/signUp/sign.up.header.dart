@@ -2,8 +2,8 @@ import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
 import 'package:flutter/material.dart';
 
-class RegHeader extends StatelessWidget {
-  const RegHeader({super.key});
+class SignUpHeader extends StatelessWidget {
+  const SignUpHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
