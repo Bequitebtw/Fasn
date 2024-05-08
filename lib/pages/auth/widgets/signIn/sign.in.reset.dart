@@ -16,16 +16,15 @@ class SignInReset extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "Forgot yout password",
+              "Forgot yout password? ",
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: fontSize14,
                   color: primary500,
                   fontFamily: "Poppins"),
             ),
-            TextButton(
-                style: ButtonStyle(splashFactory: NoSplash.splashFactory),
-                onPressed: () => {
+            InkWell(
+                onTap: () => {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
@@ -36,7 +35,7 @@ class SignInReset extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: fontSize14,
-                      color: primary900,
+                      color: Colors.black,
                       fontFamily: "Poppins",
                       decoration: TextDecoration.underline),
                 ))

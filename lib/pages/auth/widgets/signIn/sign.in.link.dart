@@ -14,16 +14,15 @@ class SignInLink extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Don`t have an account?",
+              "Don`t have an account? ",
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: fontSize16,
                   color: primary500,
                   fontFamily: "Poppins"),
             ),
-            TextButton(
-                style: ButtonStyle(splashFactory: NoSplash.splashFactory),
-                onPressed: () =>
+            InkWell(
+                onTap: () =>
                     {Navigator.pushReplacementNamed(context, "/SignUpRoute")},
                 child: Text(
                   "Join",

@@ -8,22 +8,20 @@ class SignUpLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        alignment: Alignment.center,
         height: 22,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Already hane an account?",
+              "Already hane an account? ",
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: fontSize16,
                   color: primary500,
                   fontFamily: "Poppins"),
             ),
-            TextButton(
-                style: ButtonStyle(splashFactory: NoSplash.splashFactory),
-                onPressed: () =>
+            InkWell(
+                onTap: () =>
                     {Navigator.pushReplacementNamed(context, "/SignInRoute")},
                 child: Text(
                   "Log In",
