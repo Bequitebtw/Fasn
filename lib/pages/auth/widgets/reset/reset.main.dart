@@ -82,142 +82,140 @@ class _RegScreenState extends State<ResetMainScreen> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(left: 25, right: 25, bottom: 10),
-        color: Colors.white,
-        child: Column(
-          children: [
-            const ResetHeader(),
-            Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      padding: EdgeInsets.only(left: 25, right: 25, bottom: 20),
+      color: Colors.white,
+      child: Column(
+        children: [
+          const ResetHeader(),
+          Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(top: 10),
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 7,
+                              bottom: 4,
+                            ),
+                            child: Text("Email",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0,
+                                    fontSize: fontSize16,
+                                    fontFamily: "Poppins",
+                                    color: (primary900))),
+                          ),
+                          TextFormField(
+                            onChanged: (_) {
+                              _validateForm();
+                            },
+                            controller: _emailController,
+                            validator: (value) => _validateEmail(value ?? ""),
+                            cursorColor: Colors.black,
+                            cursorHeight: 25,
+                            cursorWidth: 0.8,
+                            decoration: InputDecoration(
+                                suffixIcon: _getStatusEmail(_validateEmail(
+                                    _emailController.text.trim())),
+                                errorStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: fontSize14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                                errorText:
+                                    _validateEmail(_emailController.text),
+                                contentPadding: EdgeInsets.only(
+                                    top: 18, bottom: 18, left: 10, right: 20),
+                                labelText: "Enter your email",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                labelStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: fontSize16,
+                                    fontWeight: FontWeight.w400,
+                                    color: primary400),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10)),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          _ChangeColor(_emailController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          _ChangeColor(_emailController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          _ChangeColor(_emailController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10))),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0,
+                                fontSize: fontSize16,
+                                fontFamily: "Poppins",
+                                color: (primary900)),
+                          ),
+                        ],
+                      )),
+                ],
+              )),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Container(
+            height: 54,
+            child: FilledButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        _isAgree() ? primary900 : primary200),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                onPressed: _isAgree() ? () async {} : null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                        padding: EdgeInsets.only(top: 10),
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 7,
-                                bottom: 4,
-                              ),
-                              child: Text("Email",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0,
-                                      fontSize: fontSize16,
-                                      fontFamily: "Poppins",
-                                      color: (primary900))),
-                            ),
-                            TextFormField(
-                              onChanged: (_) {
-                                _validateForm();
-                              },
-                              controller: _emailController,
-                              validator: (value) => _validateEmail(value ?? ""),
-                              cursorColor: Colors.black,
-                              cursorHeight: 25,
-                              cursorWidth: 0.8,
-                              decoration: InputDecoration(
-                                  suffixIcon: _getStatusEmail(_validateEmail(
-                                      _emailController.text.trim())),
-                                  errorStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red),
-                                  errorText:
-                                      _validateEmail(_emailController.text),
-                                  contentPadding: EdgeInsets.only(
-                                      top: 18, bottom: 18, left: 10, right: 20),
-                                  labelText: "Enter your email",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  labelStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize16,
-                                      fontWeight: FontWeight.w400,
-                                      color: primary400),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            _ChangeColor(_emailController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            _ChangeColor(_emailController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            _ChangeColor(_emailController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10))),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0,
-                                  fontSize: fontSize16,
-                                  fontFamily: "Poppins",
-                                  color: (primary900)),
-                            ),
-                          ],
-                        )),
+                    Text(
+                      "Send code",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: fontSize16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
                   ],
                 )),
-            SizedBox(
-              height: 24,
-            ),
-            Container(
-              height: 54,
-              child: FilledButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          _isAgree() ? primary900 : primary200),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)))),
-                  onPressed: _isAgree() ? () async {} : null,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: fontSize16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                    ],
-                  )),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

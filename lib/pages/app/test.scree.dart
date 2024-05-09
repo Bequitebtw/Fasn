@@ -1,6 +1,3 @@
-import 'package:fasn/pages/auth/screen/sign.in.screen.dart';
-import 'package:fasn/pages/auth/screen/sign.up.screen.dart';
-import 'package:fasn/pages/auth/screen/start.screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -13,23 +10,6 @@ class ProfileScreen extends StatelessWidget {
     final profileImageUrl = user?.userMetadata?['avatar_url'];
     final fullName = user?.userMetadata?['full_name'];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              await supabase.auth.signOut();
-              if (context.mounted) {
-                Navigator.pushReplacementNamed(
-                  (context),
-                  '/',
-                );
-              }
-            },
-            child: const Text('Sign out'),
-          )
-        ],
-      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -49,6 +29,18 @@ class ProfileScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 32),
+            TextButton(
+              onPressed: () async {
+                await supabase.auth.signOut();
+                if (context.mounted) {
+                  Navigator.pushReplacementNamed(
+                    (context),
+                    '/',
+                  );
+                }
+              },
+              child: const Text('Sign out'),
+            )
           ],
         ),
       ),

@@ -47,14 +47,16 @@
 	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
-		<dict>
+	<dict>
 		<key>CFBundleTypeRole</key>
 		<string>Editor</string>
 		<key>CFBundleURLSchemes</key>
 		<array>
-			<string>io.supabase.flutterquickstart</string>
+		<!-- TODO Replace this value: -->
+		<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+		<string>com.googleusercontent.apps.766474982180-josptf3auoebultjum9mdmfkvmg5lo52.apps.googleusercontent.com</string>
 		</array>
-		</dict>
+	</dict>
 	</array>
 </dict>
 </plist>

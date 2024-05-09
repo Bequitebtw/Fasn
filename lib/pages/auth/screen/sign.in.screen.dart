@@ -100,297 +100,294 @@ class _RegScreenState extends State<SignInScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: ListView(
         padding: EdgeInsets.only(left: 25, top: 40, right: 25, bottom: 10),
-        color: Colors.white,
-        child: Column(
-          children: [
-            const SignInHeader(),
-            Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.only(top: 10),
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 7,
-                                bottom: 4,
-                              ),
-                              child: Text("Email",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0,
-                                      fontSize: fontSize16,
-                                      fontFamily: "Poppins",
-                                      color: (primary900))),
-                            ),
-                            TextFormField(
-                              onChanged: (_) {
-                                _validateForm();
-                              },
-                              controller: _emailController,
-                              validator: (value) => _validateEmail(value ?? ""),
-                              cursorColor: Colors.black,
-                              cursorHeight: 25,
-                              cursorWidth: 0.8,
-                              decoration: InputDecoration(
-                                  suffixIcon: _getStatusEmail(_validateEmail(
-                                      _emailController.text.trim())),
-                                  errorStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red),
-                                  errorText:
-                                      _validateEmail(_emailController.text),
-                                  contentPadding: EdgeInsets.only(
-                                      top: 18, bottom: 18, left: 10, right: 20),
-                                  labelText: "Enter your email",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  labelStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize16,
-                                      fontWeight: FontWeight.w400,
-                                      color: primary400),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            _ChangeColor(_emailController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            _ChangeColor(_emailController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            _ChangeColor(_emailController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10))),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0,
-                                  fontSize: fontSize16,
-                                  fontFamily: "Poppins",
-                                  color: (primary900)),
-                            ),
-                          ],
-                        )),
-                    Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 20),
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 7,
-                                bottom: 4,
-                              ),
-                              child: Text("Password",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0,
-                                      fontSize: fontSize16,
-                                      fontFamily: "Poppins",
-                                      color: (primary900))),
-                            ),
-                            TextFormField(
-                              onChanged: (_) {
-                                _validateForm();
-                              },
-                              controller: _passwordController,
-                              cursorColor: Colors.black,
-                              cursorHeight: 25,
-                              cursorWidth: 0.8,
-                              obscureText: _passwordVisible,
-                              decoration: InputDecoration(
-                                  suffixIconColor: _passwordVisible
-                                      ? primary400
-                                      : primary900,
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          if (_passwordVisible == false) {
-                                            _passwordVisible = true;
-                                          } else {
-                                            _passwordVisible = false;
-                                          }
-                                        });
-                                      },
-                                      icon: Icon(_passwordVisible
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility_outlined)),
-                                  errorStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.red),
-                                  contentPadding: EdgeInsets.only(
-                                      top: 18, bottom: 18, left: 10, right: 20),
-                                  labelText: "Сreate a new password",
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  labelStyle: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: fontSize16,
-                                      fontWeight: FontWeight.w400,
-                                      color: primary400),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: primary900, width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: _ChangeColor(
-                                            _passwordController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: _ChangeColor(
-                                            _passwordController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: _ChangeColor(
-                                            _passwordController.text),
-                                        width: 1.5),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.red, width: 1.5),
-                                      borderRadius: BorderRadius.circular(10))),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0,
-                                  fontSize: fontSize16,
-                                  fontFamily: "Poppins",
-                                  color: (primary900)),
-                            ),
-                          ],
-                        )),
-                  ],
-                )),
-            SignInReset(),
-            SizedBox(
-              height: 24,
-            ),
-            Container(
-              height: 54,
-              child: FilledButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          _isAgree() ? primary900 : primary200),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)))),
-                  onPressed: _isAgree()
-                      ? () async {
-                          await userLogin(
-                              email: _emailController.text,
-                              password: _passwordController.text);
-                          Navigator.pushReplacementNamed(context, '/AppRoute');
-                        }
-                      : null,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: fontSize16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                    ],
-                  )),
-            ),
-            Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 20, bottom: 20),
-                child: Text("Or",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w400,
-                        fontSize: fontSize14,
-                        color: primary500))),
-            Container(
+        children: [
+          const SignInHeader(),
+          Form(
+              key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        side: BorderSide(width: 1, color: primary200),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      onPressed: null,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                  Container(
+                      padding: EdgeInsets.only(top: 10),
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: 54,
-                            padding: EdgeInsets.only(right: 10),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 7,
+                              bottom: 4,
+                            ),
+                            child: Text("Email",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0,
+                                    fontSize: fontSize16,
+                                    fontFamily: "Poppins",
+                                    color: (primary900))),
                           ),
-                          Text(
-                            "Sign Up With Google",
+                          TextFormField(
+                            onChanged: (_) {
+                              _validateForm();
+                            },
+                            controller: _emailController,
+                            validator: (value) => _validateEmail(value ?? ""),
+                            cursorColor: Colors.black,
+                            cursorHeight: 25,
+                            cursorWidth: 0.8,
+                            decoration: InputDecoration(
+                                suffixIcon: _getStatusEmail(_validateEmail(
+                                    _emailController.text.trim())),
+                                errorStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: fontSize14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                                errorText:
+                                    _validateEmail(_emailController.text),
+                                contentPadding: EdgeInsets.only(
+                                    top: 18, bottom: 18, left: 10, right: 20),
+                                labelText: "Enter your email",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                labelStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: fontSize16,
+                                    fontWeight: FontWeight.w400,
+                                    color: primary400),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10)),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          _ChangeColor(_emailController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          _ChangeColor(_emailController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          _ChangeColor(_emailController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10))),
                             style: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: fontSize16,
                                 fontWeight: FontWeight.w500,
-                                color: primary900),
+                                letterSpacing: 0,
+                                fontSize: fontSize16,
+                                fontFamily: "Poppins",
+                                color: (primary900)),
                           ),
                         ],
                       )),
-                  SignInLink(),
+                  Container(
+                      padding: EdgeInsets.only(top: 10, bottom: 20),
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 7,
+                              bottom: 4,
+                            ),
+                            child: Text("Password",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0,
+                                    fontSize: fontSize16,
+                                    fontFamily: "Poppins",
+                                    color: (primary900))),
+                          ),
+                          TextFormField(
+                            onChanged: (_) {
+                              _validateForm();
+                            },
+                            controller: _passwordController,
+                            cursorColor: Colors.black,
+                            cursorHeight: 25,
+                            cursorWidth: 0.8,
+                            obscureText: _passwordVisible,
+                            decoration: InputDecoration(
+                                suffixIconColor:
+                                    _passwordVisible ? primary400 : primary900,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        if (_passwordVisible == false) {
+                                          _passwordVisible = true;
+                                        } else {
+                                          _passwordVisible = false;
+                                        }
+                                      });
+                                    },
+                                    icon: Icon(_passwordVisible
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined)),
+                                errorStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: fontSize14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                                contentPadding: EdgeInsets.only(
+                                    top: 18, bottom: 18, left: 10, right: 20),
+                                labelText: "Сreate a new password",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                labelStyle: TextStyle(
+                                    fontFamily: "Poppins",
+                                    fontSize: fontSize16,
+                                    fontWeight: FontWeight.w400,
+                                    color: primary400),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: primary900, width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10)),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: _ChangeColor(
+                                          _passwordController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: _ChangeColor(
+                                          _passwordController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: _ChangeColor(
+                                          _passwordController.text),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.red, width: 1.5),
+                                    borderRadius: BorderRadius.circular(10))),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0,
+                                fontSize: fontSize16,
+                                fontFamily: "Poppins",
+                                color: (primary900)),
+                          ),
+                        ],
+                      )),
                 ],
-              ),
+              )),
+          SignInReset(),
+          SizedBox(
+            height: 24,
+          ),
+          Container(
+            height: 54,
+            child: FilledButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        _isAgree() ? primary900 : primary200),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                onPressed: _isAgree()
+                    ? () async {
+                        await userLogin(
+                            email: _emailController.text,
+                            password: _passwordController.text);
+                        Navigator.pushReplacementNamed(context, '/AppRoute');
+                      }
+                    : null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Login",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: fontSize16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ],
+                )),
+          ),
+          Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(top: 20, bottom: 20),
+              child: Text("Or",
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w400,
+                      fontSize: fontSize14,
+                      color: primary500))),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      side: BorderSide(width: 1, color: primary200),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    onPressed: null,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 54,
+                          padding: EdgeInsets.only(right: 10),
+                        ),
+                        Text(
+                          "Sign Up With Google",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: fontSize16,
+                              fontWeight: FontWeight.w500,
+                              color: primary900),
+                        ),
+                      ],
+                    )),
+                SizedBox(height: 236),
+                SignInLink(),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

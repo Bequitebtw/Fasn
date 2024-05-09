@@ -2,6 +2,8 @@ import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main.dart';
+
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
   @override
@@ -58,7 +60,7 @@ class StartScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10)))),
                   onPressed: () => {
                         Navigator.pop(context),
-                        Navigator.pushNamed(context, "/SignUpRoute")
+                        Navigator.pushNamed(context, '/SignUpRoute')
                       },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
