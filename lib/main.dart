@@ -1,4 +1,5 @@
 import 'package:fasn/pages/app/main.app.screen.dart';
+import 'package:fasn/pages/app/notification.screen.dart';
 import 'package:fasn/pages/app/test.scree.dart';
 import 'package:fasn/pages/auth/screen/sign.in.screen.dart';
 import 'package:fasn/pages/auth/screen/sign.up.screen.dart';
@@ -6,6 +7,7 @@ import 'package:fasn/pages/auth/screen/reset.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fasn/pages/auth/screen/start.screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 var supabaseUrl = dotenv.env["SUPABASE_URL"];
@@ -16,6 +18,8 @@ Future<void> main() async {
   await dotenv.load(fileName: '.env');
   await Supabase.initialize(
       url: supabaseUrl as String, anonKey: supabaseKey as String);
+
+  await Future.delayed(const Duration(seconds: 3));
   runApp(const MyApp());
 }
 
@@ -41,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/AppRoute': (context) => ProfileScreen(),
         '/SignInRoute': (context) => SignInScreen(),
         '/TestProfileRoute': (context) => ProfileScreen(),
+        '/NotificationRoute': (context) => NotificationScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

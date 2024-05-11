@@ -1,5 +1,6 @@
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/images.dart';
+import 'package:fasn/pages/app/account.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -16,9 +17,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final user = supabase.auth.currentUser;
-    final profileImageUrl = user?.userMetadata?['avatar_url'];
-    final fullName = user?.userMetadata?['full_name'];
     return Scaffold(
         backgroundColor: primaryColor,
         appBar: AppBar(
@@ -38,7 +36,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontWeight: FontWeight.w400,
                             color: secondaryColor),
                       ),
-                      logo,
                       Text(
                         "sn",
                         style: TextStyle(
@@ -49,10 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.notifications_outlined,
-                    color: secondaryColor,
-                  )
+                  IconButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/NotificationRoute')},
+                      icon: Icon(Icons.notifications_outlined,
+                          color: secondaryColor))
                 ],
               ),
             )),
@@ -61,68 +59,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ListView(
             children: [],
           ),
+          // Cart page
+          ListView(
+            children: [],
+          ),
+          // Likes page
           ListView(
             children: [],
           ),
 
-          /// Notifications page
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                Card(
-                  child: ListTile(
-                    leading: Icon(Icons.notifications_sharp),
-                    title: Text('Notification 1'),
-                    subtitle: Text('This is a notification'),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    leading: Icon(Icons.notifications_sharp),
-                    title: Text('Notification 2'),
-                    subtitle: Text('This is a notification'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          /// Messages page
-          ListView.builder(
-            reverse: true,
-            itemCount: 2,
-            itemBuilder: (BuildContext context, int index) {
-              if (index == 0) {
-                return Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Text(
-                      'Hello',
-                    ),
-                  ),
-                );
-              }
-              return Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Text(
-                    'Hi!',
-                  ),
-                ),
-              );
-            },
-          ),
+          /// Account page
+          AccountScreen(),
         ][currentPageIndex],
         bottomNavigationBar: NavigationBar(
           overlayColor: MaterialStatePropertyAll(primaryColor),
@@ -136,27 +83,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
           destinations: const <Widget>[
             NavigationDestination(
               icon: Icon(Icons.home_outlined, color: secondaryColor),
-              label: 'home',
+              label: 'HOME',
             ),
             NavigationDestination(
               icon: Badge(
-                label: Text('2'),
                 child: Icon(Icons.messenger_sharp, color: secondaryColor),
               ),
-              label: 'cart',
+              label: 'LIKES',
             ),
             NavigationDestination(
               icon: Badge(
-                child: Icon(Icons.abc, color: secondaryColor),
+                child: Icon(Icons.messenger_sharp, color: secondaryColor),
               ),
-              label: "asd",
+              label: 'CART',
             ),
             NavigationDestination(
               icon: Icon(
                 Icons.account_box,
                 color: secondaryColor,
               ),
-              label: "account",
+              label: "ACCOUNT",
             ),
           ],
         ));
