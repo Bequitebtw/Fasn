@@ -1,7 +1,8 @@
+import 'package:fasn/design/images.dart';
 import 'package:fasn/main.dart';
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
-import 'package:fasn/pages/app/test.scree.dart';
+import 'package:fasn/pages/app/main.app.screen.dart';
 import 'package:fasn/pages/auth/widgets/signUp/sign.up.header.dart';
 import 'package:fasn/pages/auth/widgets/signUp/sign.up.link.dart';
 import 'package:fasn/pages/auth/widgets/signUp/sign.up.policy.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -49,6 +51,8 @@ class _RegScreenState extends State<SignUpScreen> {
     _emailController.addListener(updateFieldButton);
     _nameController.addListener(updateFieldButton);
     _passwordController.addListener(updateFieldButton);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
   }
 
   void _setupAuthListener() {
@@ -57,7 +61,7 @@ class _RegScreenState extends State<SignUpScreen> {
       if (event == AuthChangeEvent.signedIn) {
         Navigator.pop(context);
         Navigator.pushNamedAndRemoveUntil(
-            context, '/TestProfileRoute', (Route<dynamic> route) => false);
+            context, '/AppRoute', (Route<dynamic> route) => false);
       }
     });
   }
@@ -565,6 +569,9 @@ class _RegScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Container(
+                            child: Image.asset("assets/images/googleIcon.png"),
+                            height: 25),
                         Container(
                           height: 54,
                           padding: EdgeInsets.only(right: 10),

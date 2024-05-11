@@ -1,6 +1,6 @@
 import 'package:fasn/pages/app/main.app.screen.dart';
 import 'package:fasn/pages/app/notification.screen.dart';
-import 'package:fasn/pages/app/test.scree.dart';
+import 'package:fasn/pages/app/main.app.screen.dart';
 import 'package:fasn/pages/auth/screen/sign.in.screen.dart';
 import 'package:fasn/pages/auth/screen/sign.up.screen.dart';
 import 'package:fasn/pages/auth/screen/reset.screen.dart';
@@ -18,7 +18,6 @@ Future<void> main() async {
   await dotenv.load(fileName: '.env');
   await Supabase.initialize(
       url: supabaseUrl as String, anonKey: supabaseKey as String);
-
   await Future.delayed(const Duration(seconds: 3));
   runApp(const MyApp());
 }
@@ -37,14 +36,12 @@ class MyApp extends StatelessWidget {
         TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
       })),
       title: 'Fasn',
-      initialRoute:
-          supabase.auth.currentSession != null ? '/TestProfileRoute' : '/',
+      initialRoute: supabase.auth.currentSession != null ? '/AppRoute' : '/',
       routes: {
         '/': (context) => StartScreen(),
         '/SignUpRoute': (context) => SignUpScreen(),
-        '/AppRoute': (context) => ProfileScreen(),
+        '/AppRoute': (context) => MainAppScreen(),
         '/SignInRoute': (context) => SignInScreen(),
-        '/TestProfileRoute': (context) => ProfileScreen(),
         '/NotificationRoute': (context) => NotificationScreen(),
       },
       debugShowCheckedModeBanner: false,

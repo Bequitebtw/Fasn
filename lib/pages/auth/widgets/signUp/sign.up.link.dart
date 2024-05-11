@@ -21,8 +21,7 @@ class SignUpLink extends StatelessWidget {
                   fontFamily: "Poppins"),
             ),
             InkWell(
-                onTap: () =>
-                    {Navigator.pushReplacementNamed(context, "/SignInRoute")},
+                onTap: () => {Navigator.pushNamed(context, "/SignInRoute")},
                 child: Text(
                   "Log In",
                   style: TextStyle(

@@ -18,15 +18,6 @@ class AccountScreen extends StatelessWidget {
       backgroundColor: primaryColor,
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text(
-          "My Profile",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: secondaryColor,
-            fontFamily: 'Poppins',
-          ),
-        ),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
@@ -35,16 +26,24 @@ class AccountScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 15),
-                  child: ClipOval(
-                    child: Image.network(
-                      profileImageUrl,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                profileImageUrl == Null
+                    ? Container(
+                        child: Icon(
+                          Icons.account_circle,
+                          size: 60,
+                          color: Colors.grey,
+                        ),
+                      )
+                    : ClipOval(
+                        child: Image.network(
+                          profileImageUrl,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                SizedBox(
+                  width: 20,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,12 +74,7 @@ class AccountScreen extends StatelessWidget {
             TextButton(
               onPressed: () async {
                 await supabase.auth.signOut();
-                if (context.mounted) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                        builder: (context) => const StartScreen()),
-                  );
-                }
+                Navigator.pushReplacementNamed(context, '/SignInRoute');
               },
               child: const Text('Sign out'),
             )

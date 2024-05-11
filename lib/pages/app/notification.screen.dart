@@ -25,7 +25,7 @@ class NotificationScreen extends StatelessWidget {
           ),
         ),
         body: Container(
-          padding: EdgeInsets.only(left: 8, right: 8, bottom: 20),
+          padding: EdgeInsets.only(left: 8, right: 8, bottom: 10),
           child: Column(
             children: [
               Expanded(
@@ -51,15 +51,27 @@ class NotificationScreen extends StatelessWidget {
                       );
                     }),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
+              SizedBox(
+                height: 50,
                 child: ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: primaryColor),
                     onPressed: () => {},
-                    child: Text(
-                      "Delete all",
-                      style: TextStyle(color: Colors.white),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.delete),
+                        Text(
+                          "Delete All",
+                          style: TextStyle(
+                              color: secondaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Poppins"),
+                        )
+                      ],
                     )),
-              )
+              ),
             ],
           ),
         ));

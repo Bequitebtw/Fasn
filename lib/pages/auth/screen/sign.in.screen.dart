@@ -1,3 +1,4 @@
+import 'package:fasn/design/images.dart';
 import 'package:fasn/main.dart';
 import 'package:fasn/design/colors.dart';
 import 'package:fasn/design/dimensions.dart';
@@ -5,11 +6,15 @@ import 'package:fasn/pages/auth/widgets/signIn/sign.in.header.dart';
 import 'package:fasn/pages/auth/widgets/signIn/sign.in.link.dart';
 import 'package:fasn/pages/auth/widgets/signIn/sign.in.reset.dart';
 import 'package:fasn/pages/auth/widgets/signUp/sign.up.link.dart';
+import 'package:fasn/utils/check.platform.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -36,9 +41,23 @@ class _RegScreenState extends State<SignInScreen> {
 
   @override
   void initState() {
+    _setupAuthListener();
     bool _isDisabled = true;
     super.initState();
     _emailController.addListener(updateFieldButton);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
+  }
+
+  void _setupAuthListener() {
+    supabase.auth.onAuthStateChange.listen((data) {
+      final event = data.event;
+      if (event == AuthChangeEvent.signedIn) {
+        Navigator.pop(context);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/AppRoute', (Route<dynamic> route) => false);
+      }
+    });
   }
 
   @override
@@ -98,6 +117,37 @@ class _RegScreenState extends State<SignInScreen> {
     return Icon(Icons.email, color: Colors.green);
   }
 
+  Future<void> _nativeGoogleSignIn() async {
+    const webClientId =
+        '766474982180-u7jr8c78u2j5qqeat3roh76dtid9l5r6.apps.googleusercontent.com';
+    const iosClientId =
+        '766474982180-josptf3auoebultjum9mdmfkvmg5lo52.apps.googleusercontent.com';
+
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId: iosClientId,
+      serverClientId: webClientId,
+    );
+
+    final googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    final accessToken = googleAuth.accessToken;
+    final idToken = googleAuth.idToken;
+
+    if (accessToken == null) {
+      throw 'No Access Token found.';
+    }
+    if (idToken == null) {
+      throw 'No ID Token found.';
+    }
+
+    await supabase.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: accessToken,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
@@ -363,17 +413,27 @@ class _RegScreenState extends State<SignInScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    onPressed: null,
+                    onPressed: () async {
+                      if (PlatformUtils.isMobile) {
+                        await _nativeGoogleSignIn();
+                      } else {
+                        await supabase.auth
+                            .signInWithOAuth(OAuthProvider.google);
+                      }
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
+                            child: Image.asset("assets/images/googleIcon.png"),
+                            height: 25),
+                        Container(
                           height: 54,
                           padding: EdgeInsets.only(right: 10),
                         ),
                         Text(
-                          "Sign Up With Google",
+                          "Login With Google",
                           style: TextStyle(
                               fontFamily: "Poppins",
                               fontSize: fontSize16,
