@@ -8,7 +8,7 @@ class SignUpLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 22,
+        height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

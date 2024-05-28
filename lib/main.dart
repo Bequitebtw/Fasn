@@ -1,6 +1,7 @@
 import 'package:fasn/pages/app/main.app.screen.dart';
 import 'package:fasn/pages/app/notification.screen.dart';
 import 'package:fasn/pages/app/main.app.screen.dart';
+import 'package:fasn/pages/app/settings.screen.dart';
 import 'package:fasn/pages/auth/screen/sign.in.screen.dart';
 import 'package:fasn/pages/auth/screen/sign.up.screen.dart';
 import 'package:fasn/pages/auth/screen/reset.screen.dart';
@@ -18,7 +19,7 @@ Future<void> main() async {
   await dotenv.load(fileName: '.env');
   await Supabase.initialize(
       url: supabaseUrl as String, anonKey: supabaseKey as String);
-  await Future.delayed(const Duration(seconds: 3));
+  await Future.delayed(const Duration(seconds: 0));
   runApp(const MyApp());
 }
 
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/AppRoute': (context) => MainAppScreen(),
         '/SignInRoute': (context) => SignInScreen(),
         '/NotificationRoute': (context) => NotificationScreen(),
+        '/SettingsScreen': (context) => SettingsScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

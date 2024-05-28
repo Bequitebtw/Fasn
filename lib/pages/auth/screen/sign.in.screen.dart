@@ -151,7 +151,7 @@ class _RegScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.only(left: 25, top: 40, right: 25, bottom: 10),
+        padding: EdgeInsets.only(left: 25, top: 40, right: 25, bottom: 0),
         children: [
           const SignInHeader(),
           Form(
@@ -442,8 +442,8 @@ class _RegScreenState extends State<SignInScreen> {
                         ),
                       ],
                     )),
-                SizedBox(height: 236),
-                SignInLink(),
+                SizedBox(height: 200),
+                SignInLink()
               ],
             ),
           ),

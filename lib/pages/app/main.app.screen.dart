@@ -128,20 +128,30 @@ class _MainScreenState extends State<MainAppScreen> {
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
+                  size: 25,
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: ImageIcon(
+                  AssetImage("images/wishlistIcon.png"),
+                  size: 28,
+                ),
+                label: 'Wishlist',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: ImageIcon(
+                  AssetImage("images/cartIcon.png"),
+                  size: 28,
+                ),
+                label: 'Cart',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: ImageIcon(
+                  AssetImage("images/accountIcon.png"),
+                  size: 20,
+                ),
+                label: 'Account',
               ),
             ],
             currentIndex: _selectedIndex,

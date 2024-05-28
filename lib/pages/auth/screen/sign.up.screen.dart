@@ -123,7 +123,7 @@ class _RegScreenState extends State<SignUpScreen> {
     RegExp nameRegex =
         RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
     if (!nameRegex.hasMatch(value)) {
-      return 'The password must be at least 8 characters long, use\ncapital letters,numbers,and special characters.';
+      return 'The password must be at least 8 characters\n long, use capital letters,\nnumbers,and special characters.';
     }
     return null;
   }
@@ -203,7 +203,7 @@ class _RegScreenState extends State<SignUpScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: ListView(
-        padding: EdgeInsets.only(left: 25, top: 40, right: 25, bottom: 10),
+        padding: EdgeInsets.only(left: 25, top: 40, right: 25, bottom: 0),
         children: [
           const SignUpHeader(),
           Form(
@@ -586,13 +586,13 @@ class _RegScreenState extends State<SignUpScreen> {
                         ),
                       ],
                     )),
-                SizedBox(
-                  height: 120,
-                ),
-                SignUpLink(),
               ],
             ),
           ),
+          SizedBox(
+            height: 60,
+          ),
+          SignUpLink()
         ],
       ),
     );

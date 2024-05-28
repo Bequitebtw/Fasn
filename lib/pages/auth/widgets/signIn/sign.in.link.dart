@@ -9,7 +9,7 @@ class SignInLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        height: 22,
+        height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
